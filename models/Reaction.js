@@ -1,26 +1,13 @@
-const { Schema, model } = require('mongoose');
+const { Schema } = require('mongoose');
 
 // Schema to create Post model
-const postSchema = new Schema(
+const reactionSchema = new Schema(
   {
-    text: String,
-    username: String,
-    comments: [{ type: Schema.Types.ObjectId, ref: 'comment' }],
-  },
-  {
-    toJSON: {
-      virtuals: true,
-    },
-    id: false,
+    reactionId: { type: Schema.Types.ObjectId, default: new ObjectId(), auto: true },
+    reactionBody: { type: String, required: true, minLength: 1, maxLength: 280 },
+    username: { type: String, required: true },
+    createdAt: { type: Date, default: Date.now }, /* NEED TO ADD GETTER TO FORMAT DATE */
   }
 );
-
-// Create a virtual property `commentCount` that gets the amount of comments per post
-postSchema.virtual('commentCount').get(function () {
-  return this.comments.length;
-});
-
-// Initialize our Post model
-const Post = model('post', postSchema);
 
 module.exports = Post;
