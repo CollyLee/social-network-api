@@ -4,31 +4,31 @@ const Reaction = require('./Reaction')
 
 // THOUGHT SCHEMA
 const thoughtSchema = new Schema({
-  thoughtText: 
-  { 
-    type: String, 
-    required: true, 
-    minLength: 1, 
-    maxLength: 280 
+  thoughtText:
+  {
+    type: String,
+    required: true,
+    minLength: 1,
+    maxLength: 280
   },
-  createdAt: 
-  { 
-    type: Date, 
-    default: Date.now 
-  }, /* NEED TO ADD GETTER TO FORMAT DATE */
-  username: 
-  { 
-    type: String, 
+  createdAt:
+  {
+    type: Date,
+    default: Date.now /* NEED TO ADD GETTER TO FORMAT DATE */
+  },
+  username:
+  {
+    type: String,
     required: true,
     ref: 'User',
   },
-    reactions: [Reaction],
-}, 
-{
-  toJSON: {
-    virtuals: true,
-  },
-});
+  reactions: [Reaction],
+},
+  {
+    toJSON: {
+      virtuals: true,
+    },
+  });
 
 // REACTION COUNT VIRTUAL
 thoughtSchema.virtual('reactionCount').get(function () {

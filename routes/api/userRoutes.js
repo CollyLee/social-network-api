@@ -8,14 +8,14 @@ const {
 } = require('../../controllers/userController');
 
 router
-    // .route('/')
+    .route('/')
     .get(getAllUsers)
-    // .post(createNewUser);
+    .post(createNewUser);
 
-// router
-//     .route('/:_id')
-//     .get(getUserByID)
-//     .put(updateUserByID)
-//     .delete(deleteUserByID);
+router
+    .route('/:_id')
+    .get(getUserByID)
+    .put(updateUserByID)
+    .delete(deleteUserByID);
 
 module.exports = router;
