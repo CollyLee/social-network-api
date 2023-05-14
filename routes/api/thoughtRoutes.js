@@ -13,9 +13,9 @@ router
     .post(createNewThought);
 
 router
-    .route('/:_id')
+    .route('/:thoughtID')
     .get(getThoughtByID)
-//     .put(updateThoughtByID)
-//     .delete(deleteThoughtByID);
+    .put(updateThoughtByID)
+    .delete(deleteThoughtByID);
 
 module.exports = router;

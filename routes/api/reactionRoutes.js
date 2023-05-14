@@ -9,7 +9,7 @@ router
     .post(createNewReaction);
 
 router
-    .route('/:_id')
+    .route('/:reactionID')
     .delete(deleteReactionByID);
 
 module.exports = router;

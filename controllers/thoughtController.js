@@ -1,5 +1,5 @@
 const { ObjectId } = require('mongoose').Types;
-const { Thought, User } = require('../models');
+const { Thought, User, Reaction } = require('../models');
 
 module.exports = {
 
@@ -19,7 +19,7 @@ module.exports = {
 
     // GET A THOUGHT BY ID TAG
     getThoughtByID(req, res) {
-        Thought.findOne({ _id: req.params.thoughtId })
+        Thought.findOne({ _id: req.params.thoughtID })
             .then((thought) =>
                 !thought
                     ? res.status(404).json({ message: 'No thought with that ID' })
@@ -31,7 +31,7 @@ module.exports = {
             });
     },
 
-    // UPDATE A USER BY THEIR ID TAG
+    // UPDATE A THOUGHT BY ITS ID TAG
     updateThoughtByID(req, res) {
         Thought.findOneAndUpdate(
             { _id: req.params.thoughtID },
@@ -45,14 +45,14 @@ module.exports = {
             .catch((err) => res.status(500).json(err));
     },
 
-    // DELETE A THOUGHT BY THEIR ID TAG
+    // DELETE A THOUGHT BY ITS ID TAG
     deleteThoughtByID(req, res) {
         Thought.findOneAndDelete({ _id: req.params.thoughtID })
-            .then((thought) =>
-                !thought
-                    ? res.status(404).json({ message: 'No thought with that ID' })
-                    : Reaction.deleteMany({ _id: { $in: thought.reaction } })
-            )
+            // .then((thought) =>
+            //     !thought
+            //         ? res.status(404).json({ message: 'No thought with that ID' })
+            //         : Reaction.deleteMany({ _id: { $in: Thought.reaction } })
+            // )
             .then(() => res.json({ message: 'Thought and reactions deleted' }))
             .catch((err) => res.status(500).json(err));
     },
