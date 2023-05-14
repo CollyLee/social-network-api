@@ -2,10 +2,31 @@ const { Schema, model } = require('mongoose');
 
 // USER SCHEMA
 const userSchema = new Schema({
-    username: { type: String, required: true, trim: true, index: { unique: true } },
-    email: { type: String, required: true, index: { unique: true } }, /* NEED TO ADD EMAIL VALIDATION */
-    thoughts: [{ type: Schema.Types.ObjectId, ref: 'Thought' }],
-    friends: [{ type: Schema.Types.ObjectId, ref: 'User' }],
+    username:
+    {
+        type: String,
+        required: true,
+        trim: true,
+        index: { unique: true }
+    },
+    email:
+    {
+        type: String,
+        required: true,
+        index: { unique: true }
+    }, /* NEED TO ADD EMAIL VALIDATION */
+    thoughts: [
+        {
+            type: Schema.Types.ObjectId,
+            ref: 'Thought'
+        },
+    ],
+    friends: [
+        {
+            type: Schema.Types.ObjectId,
+            ref: 'User'
+        },
+],
 }, {
     toJSON: {
         virtuals: true,
@@ -30,7 +51,6 @@ User.create([
     { username: 'Mimi Landgraab', email: 'mimilandgraab@gmail.com' },
     { username: 'Betty Newbie', email: 'bettyBnewbie@gmail.com' },
     { username: 'Bob Newbie', email: 'MrBettyNewbie@gmail.com' },
-
 ])
 
 module.exports = User;

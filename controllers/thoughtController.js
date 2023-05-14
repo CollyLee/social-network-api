@@ -1,24 +1,37 @@
-const { Post, User } = require('../models');
+const { Thought, User } = require('../models');
 
-// module.exports = {
-//   getPosts(req, res) {
-//     Post.find()
-//       .then((posts) => res.json(posts))
-//       .catch((err) => res.status(500).json(err));
-//   },
-//   getSinglePost(req, res) {
-//     Post.findOne({ _id: req.params.postId })
-//       .then((post) =>
-//         !post
-//           ? res.status(404).json({ message: 'No post with that ID' })
-//           : res.json(post)
-//       )
-//       .catch((err) => res.status(500).json(err));
-//   },
-//   // create a new post
-//   createPost(req, res) {
-//     Post.create(req.body)
-//       .then((dbPostData) => res.json(dbPostData))
-//       .catch((err) => res.status(500).json(err));
-//   },
-// };
+module.exports = {
+
+    getAllThoughts(req, res) {
+        Thought.find()
+        .then ((thoughts) => res.json(thoughts))
+        .catch((err) => res.status(500).json(err));
+    },
+
+    createNewThought(req, res) {
+    Thought.create(req.body)
+    .then((thought) => res.json(thought))
+    .catch((err) => res.status(500).json(err));
+    },
+
+    getThoughtByID(req, res) {
+    Thought.findOne({ _id: req.params.thoughtId })
+    .then((thought) =>
+        !thought
+          ? res.status(404).json({ message: 'No thought with that ID' })
+          : res.json(thought)
+      )
+      .catch((err) => {
+        console.log(err);
+        return res.status(500).json(err)});
+    },
+
+    updateThoughtByID(req, res) {
+    
+    },
+
+    deleteThoughtByID(req, res) {
+    
+    },
+
+};
