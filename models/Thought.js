@@ -14,7 +14,7 @@ const thoughtSchema = new Schema({
   createdAt:
   {
     type: Date,
-    default: Date.now /* NEED TO ADD GETTER TO FORMAT DATE */
+    default: Date.now 
   },
   username:
   {
@@ -27,6 +27,7 @@ const thoughtSchema = new Schema({
   {
     toJSON: {
       virtuals: true,
+      getters: true,
     },
   });
 
@@ -36,7 +37,7 @@ thoughtSchema.virtual('reactionCount').get(function () {
 });
 
 // CREATING THOUGHT MODEL
-const Thought = model('thought', thoughtSchema);
+const Thought = model('Thought', thoughtSchema);
 
 // SEEDING THOUGHT DATA
 const seedThoughts = async () => {
@@ -53,7 +54,7 @@ const seedThoughts = async () => {
     { thoughtText: "Tuesday has no feel! Monday has a feel. Friday has a feel. Sunday has a feel.", username: 'Bob Newbie' },
   ])
 };
-
+module.exports = Thought;
 seedThoughts();
 
-module.exports = Thought;
+

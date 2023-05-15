@@ -39,7 +39,7 @@ userSchema.virtual('friendCount').get(function () {
 });
 
 // CREATING USER MODEL
-const User = model('user', userSchema);
+const User = model('User', userSchema);
 
 // SEEDING USER DATA
 
@@ -56,7 +56,6 @@ const seedUsers = async () => {
         { username: 'Bob Newbie', email: 'MrBettyNewbie@gmail.com' },
     ])
 };
-
+module.exports = User;
 seedUsers();
 
-module.exports = User;

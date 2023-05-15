@@ -1,5 +1,5 @@
 const { ObjectId } = require('mongoose').Types;
-const { Thought, User, Reaction } = require('../models');
+const { Thought, Reaction } = require('../models');
 
 module.exports = {
 
@@ -48,39 +48,31 @@ module.exports = {
     // DELETE A THOUGHT BY ITS ID TAG
     deleteThoughtByID(req, res) {
         Thought.findOneAndDelete({ _id: req.params.thoughtID })
-            // .then((thought) =>
-            //     !thought
-            //         ? res.status(404).json({ message: 'No thought with that ID' })
-            //         : Reaction.deleteMany({ _id: { $in: Thought.reaction } })
-            // )
             .then(() => res.json({ message: 'Thought and reactions deleted' }))
             .catch((err) => res.status(500).json(err));
     },
 
     // CREATE A REACTION
     createNewReaction(req, res) {
-        Reaction.create(req.body)
-            .then((reaction) => {
-                return Thought.findOneAndUpdate(
-                    { _id: req.body.thoughtId },
-                    { $push: { reaction: reaction._id } },
-                    { new: true }
-                );
+        Thought.findOneAndUpdate(
+            { _id: req.params.thoughtID },
+            { $push: { reaction: req.body } },
+            { new: true }
+        )
+            .then((thoughtData) => {
+                if (!thoughtData) {
+                    res.status(404).json({ message: "no thought with that id"})                    
+                } else {
+                    res.json(thoughtData)
+                }
             })
-            .then((post) =>
-                !post
-                    ? res
-                        .status(404)
-                        .json({ message: 'comment created, but no posts with this ID' })
-                    : res.json({ message: 'comment created' })
-            )
             .catch((err) => {
                 console.error(err);
             });
     },
     // DELETE A REACTION BY ITS ID TAG
     deleteReactionByID(req, res) {
-        Reaction.findOneAndDelete({ _id: req.params.reactionId })
+        Reaction.findOneAndDelete({ _id: req.params.reactionID })
             .then(() => res.json({ message: 'Reaction deleted' }))
             .catch((err) => res.status(500).json(err));
     }

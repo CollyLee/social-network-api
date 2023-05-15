@@ -27,7 +27,7 @@ module.exports = {
             .catch((err) => res.status(500).json(err));
     },
 
-    // // UPDATE USER BY THEIR ID TAG
+    // UPDATE USER BY THEIR ID TAG
     updateUserByID(req, res) {
         User.findByIdAndUpdate(
             { _id: req.params.userID },
@@ -41,7 +41,7 @@ module.exports = {
             .catch((err) => res.status(500).json(err));
     },
 
-    // // DELETE USER BY THEIR ID TAG
+    // DELETE USER BY THEIR ID TAG
     deleteUserByID(req, res) {
         User.findOneAndDelete({ _id: req.params.userID })
             // .then((user) =>
@@ -52,4 +52,16 @@ module.exports = {
             .then(() => res.json({ message: 'User and thoughts deleted!' }))
             .catch((err) => res.status(500).json(err));
     },
-};
+
+
+    // ADD A FRIEND
+    addAFriend(req, res) {
+        User.findByIdAndUpdate(
+            { _id: req.params.thoughtID },
+            { $push: { friend: friend._id } },
+            { new: true }
+        )
+            .then(() => res.json({ message: 'Friend added!' }))
+            .catch((err) => res.status(500).json(err));
+    }
+}
