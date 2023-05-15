@@ -39,17 +39,21 @@ thoughtSchema.virtual('reactionCount').get(function () {
 const Thought = model('thought', thoughtSchema);
 
 // SEEDING THOUGHT DATA
-Thought.deleteMany({});
-Thought.create([
-  { thoughtText: "She said I wasn't sponge-worthy. Wouldn't waste a sponge on me.", username: 'Cristobal Malsam' },
-  { thoughtText: "I can't be with someone like me. I hate myself!", username: 'Bella Goth' },
-  { thoughtText: "People on dates shouldn't even be allowed out in public.", username: 'Bob Pancakes' },
-  { thoughtText: "What could possess anyone to throw a party? I mean, to have a bunch of strangers treat your house like a hotel room.", username: 'Nina Caliente' },
-  { thoughtText: "Hunger will make people do amazing things. I mean, the proof of that is cannibalism.", username: 'Nina Caliente' },
-  { thoughtText: "If you want to make a person feel better after they sneeze, you shouldn't say 'God bless you.' You should say, 'You're so good looking!", username: 'Mimi Landgraab' },
-  { thoughtText: "Is it possible that I'm not as attractive as I think I am?", username: 'Betty Newbie' },
-  { thoughtText: "It's not fair people are seated first come, first served. It should be based on who's hungriest.", username: 'Bob Newbie' },
-  { thoughtText: "Tuesday has no feel! Monday has a feel. Friday has a feel. Sunday has a feel.", username: 'Bob Newbie' },
-])
+const seedThoughts = async () => {
+  await Thought.deleteMany({});
+  await Thought.create([
+    { thoughtText: "She said I wasn't sponge-worthy. Wouldn't waste a sponge on me.", username: 'Cristobal Malsam' },
+    { thoughtText: "I can't be with someone like me. I hate myself!", username: 'Bella Goth' },
+    { thoughtText: "People on dates shouldn't even be allowed out in public.", username: 'Bob Pancakes' },
+    { thoughtText: "What could possess anyone to throw a party? I mean, to have a bunch of strangers treat your house like a hotel room.", username: 'Nina Caliente' },
+    { thoughtText: "Hunger will make people do amazing things. I mean, the proof of that is cannibalism.", username: 'Nina Caliente' },
+    { thoughtText: "If you want to make a person feel better after they sneeze, you shouldn't say 'God bless you.' You should say, 'You're so good looking!", username: 'Mimi Landgraab' },
+    { thoughtText: "Is it possible that I'm not as attractive as I think I am?", username: 'Betty Newbie' },
+    { thoughtText: "It's not fair people are seated first come, first served. It should be based on who's hungriest.", username: 'Bob Newbie' },
+    { thoughtText: "Tuesday has no feel! Monday has a feel. Friday has a feel. Sunday has a feel.", username: 'Bob Newbie' },
+  ])
+};
+
+seedThoughts();
 
 module.exports = Thought;
