@@ -42,15 +42,21 @@ userSchema.virtual('friendCount').get(function () {
 const User = model('user', userSchema);
 
 // SEEDING USER DATA
-User.create([
-    { username: 'Cristobal Malsam', email: 'cmalsam@gmail.com' },
-    { username: 'Chong Dahmer', email: 'cdahmer@gmail.com' },
-    { username: 'Bella Goth', email: 'babybellaGoth@gmail.com' },
-    { username: 'Bob Pancakes', email: 'bobbycakes@gmail.com' },
-    { username: 'Nina Caliente', email: 'mizzCaliente@gmail.com' },
-    { username: 'Mimi Landgraab', email: 'mimilandgraab@gmail.com' },
-    { username: 'Betty Newbie', email: 'bettyBnewbie@gmail.com' },
-    { username: 'Bob Newbie', email: 'MrBettyNewbie@gmail.com' },
-])
+
+const seedUsers = async () => {
+    await User.deleteMany({});
+    await User.insertMany([
+        { username: 'Cristobal Malsam', email: 'cmalsam@gmail.com' },
+        { username: 'Chong Dahmer', email: 'cdahmer@gmail.com' },
+        { username: 'Bella Goth', email: 'babybellaGoth@gmail.com' },
+        { username: 'Bob Pancakes', email: 'bobbycakes@gmail.com' },
+        { username: 'Nina Caliente', email: 'mizzCaliente@gmail.com' },
+        { username: 'Mimi Landgraab', email: 'mimilandgraab@gmail.com' },
+        { username: 'Betty Newbie', email: 'bettyBnewbie@gmail.com' },
+        { username: 'Bob Newbie', email: 'MrBettyNewbie@gmail.com' },
+    ])
+};
+
+seedUsers();
 
 module.exports = User;

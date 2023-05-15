@@ -39,6 +39,7 @@ thoughtSchema.virtual('reactionCount').get(function () {
 const Thought = model('thought', thoughtSchema);
 
 // SEEDING THOUGHT DATA
+Thought.deleteMany({});
 Thought.create([
   { thoughtText: "She said I wasn't sponge-worthy. Wouldn't waste a sponge on me.", username: 'Cristobal Malsam' },
   { thoughtText: "I can't be with someone like me. I hate myself!", username: 'Bella Goth' },
