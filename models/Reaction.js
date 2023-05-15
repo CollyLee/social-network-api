@@ -22,7 +22,7 @@ const reactionSchema = new Schema(
     createdAt:
     {
       type: Date,
-      default: Date.now /* NEED TO ADD GETTER TO FORMAT DATE */
+      default: Date.now
     },
   },
   {

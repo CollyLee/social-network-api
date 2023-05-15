@@ -44,11 +44,6 @@ module.exports = {
     // DELETE USER BY THEIR ID TAG
     deleteUserByID(req, res) {
         User.findOneAndDelete({ _id: req.params.userID })
-            // .then((user) =>
-            //     !user
-            //         ? res.status(404).json({ message: 'No user with that ID' })
-            //         : Reaction.deleteMany({ _id: { $in: user.thought } })
-            // )
             .then(() => res.json({ message: 'User and thoughts deleted!' }))
             .catch((err) => res.status(500).json(err));
     },
